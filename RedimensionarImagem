@@ -1,0 +1,18 @@
+procedure RedimensionarImagem(pImageDir: string; pFatorCompressao: integer);
+var BMP: TBitmap;
+    NewWidth,
+    NewHeight: integer;
+begin
+  BMP := TBitmap.Create;
+  BMP.LoadFromFile(pImageDir);
+
+  NewWidth  := 200; //((BMP.Width * pFatorCompressao) / 100);
+  NewHeight := 200;
+
+  BMP.Canvas.StretchDraw(
+    Rect(0, 0, NewWidth, NewHeight),
+    BMP);
+  BMP.SetSize(NewWidth, NewHeight);
+
+  BMP.SaveToFile(pImageDir);
+end;
